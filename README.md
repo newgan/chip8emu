@@ -1,4 +1,4 @@
 TODO:
-- implement quirks for other chip8 versions
+- implement other chip8 versions
 - debug overlays
-- fix broken instructions
+- sound effect support
