@@ -6,7 +6,7 @@
 int main() {
 	CPU cpu;
 	cpu.init();
-	cpu.read_rom("../demos/invaders.ch8");
+	cpu.read_rom("../demos/5-quirks.ch8");
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		return 0;

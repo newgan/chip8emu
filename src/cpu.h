@@ -216,25 +216,34 @@ public:
 		const int width = 8;
 		int height = cur_opcode.n();
 
-		uint8_t vx = V[cur_opcode.x() % screen_width];
-		uint8_t vy = V[cur_opcode.y() % screen_height];
+		uint8_t vx = V[cur_opcode.x()] % screen_width;
+		uint8_t vy = V[cur_opcode.y()] % screen_height;
 		uint8_t pixel;
 
 		V[0xF] = 0;
 
 		for (int y_coord = 0; y_coord < height; y_coord++) {
 			pixel = ram[I + y_coord];
-				
+
+			auto row = (y_coord + vy);// % screen_height;
+			if (row >= screen_height)
+				break;
+
 			for (int x_coord = 0; x_coord < width; x_coord++) {
+
+				auto col = (x_coord + vx);// % screen_width;
+				if (col >= screen_width)
+					continue;
+
 				if ((pixel & (0x80 >> x_coord)) > 0) {
-					auto screen_pos = (y_coord + vy)
+					auto screen_pos = row
 						* screen_width
-						+ (x_coord + vx);
+						+ col;
 
 					if (frame_buffer[screen_pos]) {
 						V[0xF] = 1;
 					}
-					
+
 					frame_buffer[screen_pos] ^= 1;
 				}
 			}
