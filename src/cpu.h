@@ -225,13 +225,13 @@ public:
 		for (int y_coord = 0; y_coord < height; y_coord++) {
 			pixel = ram[I + y_coord];
 
-			auto row = (y_coord + vy);// % screen_height;
+			auto row = (y_coord + vy);// % screen_height; // WRAPPING
 			if (row >= screen_height)
 				break;
 
 			for (int x_coord = 0; x_coord < width; x_coord++) {
 
-				auto col = (x_coord + vx);// % screen_width;
+				auto col = (x_coord + vx);// % screen_width;  // WRAPPING
 				if (col >= screen_width)
 					continue;
 
